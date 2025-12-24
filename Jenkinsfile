@@ -33,14 +33,14 @@ pipeline {
 
     stage('Terraform Plan') {
       steps {
-        sh 'terraform plan -var-file=env/qa.tfvars'
+        sh 'terraform plan -out=tfplan'
       }
     }
 
     stage('Terraform Apply') {
       steps {
         input message: "Approve deployment to QA?"
-        sh 'terraform apply -auto-approve -var-file=env/qa.tfvars'
+        sh 'terraform apply -auto-approve tfplan'
       }
     }
   }
