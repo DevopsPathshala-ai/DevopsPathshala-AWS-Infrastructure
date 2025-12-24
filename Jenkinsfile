@@ -16,26 +16,31 @@ pipeline {
 
     stage('Terraform Init') {
       steps {
-        sh "terraform init"
+        withCredentials([
+          [$class: 'AmazonWebServicesCredentialsBinding',
+           credentialsId: 'aws-terraform']
+        ]) {
+          sh 'terraform init -backend-config=backend/qa.tfbackend'
+        }
       }
     }
 
     stage('Terraform Validate') {
       steps {
-        sh "terraform validate"
+        sh 'terraform validate'
       }
     }
 
     stage('Terraform Plan') {
       steps {
-        sh "terraform plan -var-file=env/qa.tfvars"
+        sh 'terraform plan -var-file=env/qa.tfvars'
       }
     }
 
     stage('Terraform Apply') {
       steps {
         input message: "Approve deployment to QA?"
-        sh "terraform apply -auto-approve -var-file=env/qa.tfvars"
+        sh 'terraform apply -auto-approve -var-file=env/qa.tfvars'
       }
     }
   }
