@@ -16,12 +16,12 @@ pipeline {
     stage('Set Environment') {
       steps {
         script {
-          if (env.BRANCH_NAME == 'dev') {
-            env.ENV_NAME = 'dev'
+          if (env.BRANCH_NAME == 'qa') {
+            env.ENV_NAME = 'qa'
             env.AUTO_APPLY = 'true'
           }
-          else if (env.BRANCH_NAME == 'qa') {
-            env.ENV_NAME = 'qa'
+          else if (env.BRANCH_NAME == 'dev') {
+            env.ENV_NAME = 'dev'
             env.AUTO_APPLY = 'false'
           }
           else if (env.BRANCH_NAME == 'prod' || env.BRANCH_NAME == 'main') {
