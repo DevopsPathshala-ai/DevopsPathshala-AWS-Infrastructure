@@ -19,10 +19,10 @@ module "vpc" {
       cidr = "10.20.2.0/24"
       az   = "us-east-1a"
     }
-    private-2 = {
+    /*private-2 = {
       cidr = "10.20.3.0/24"
       az   = "us-east-1b"
-    }
+    }*/
  
   }
 
