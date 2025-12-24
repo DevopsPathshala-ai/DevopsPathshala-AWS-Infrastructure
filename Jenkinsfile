@@ -20,7 +20,7 @@ pipeline {
           [$class: 'AmazonWebServicesCredentialsBinding',
            credentialsId: 'aws-terraform']
         ]) {
-          sh 'terraform init -backend-config=backend/qa.tfbackend'
+          sh 'terraform init'
         }
       }
     }
